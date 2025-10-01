@@ -4,9 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Building2, ArrowLeft } from "lucide-react";
+import { Building2, ArrowLeft, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { GovBranding } from "@/components/GovBranding";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const OrganizationAuth = () => {
   const navigate = useNavigate();
@@ -18,8 +20,8 @@ const OrganizationAuth = () => {
     setIsLoading(true);
     setTimeout(() => {
       toast({
-        title: "Sign in successful",
-        description: "Welcome back!",
+        title: "Welcome back! 🎉",
+        description: "Successfully signed in",
       });
       navigate("/organization/dashboard");
       setIsLoading(false);
@@ -31,7 +33,7 @@ const OrganizationAuth = () => {
     setIsLoading(true);
     setTimeout(() => {
       toast({
-        title: "Organization registered",
+        title: "Organization registered! ✨",
         description: "You can now post internships",
       });
       navigate("/organization/dashboard");
@@ -40,72 +42,133 @@ const OrganizationAuth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/")}
-          className="mb-4"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Home
-        </Button>
-
-        <Card className="p-8 shadow-elevated">
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-secondary to-secondary/80 flex items-center justify-center">
-              <Building2 className="w-6 h-6 text-secondary-foreground" />
-            </div>
+    <div className="min-h-screen bg-background">
+      <GovBranding />
+      
+      <div className="flex items-center justify-center p-4 min-h-[calc(100vh-56px)]">
+        <div className="w-full max-w-md">
+          <div className="absolute top-4 right-4">
+            <ThemeToggle />
           </div>
-          <h2 className="text-2xl font-bold text-center mb-6 text-foreground">Organization Portal</h2>
 
-          <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Sign In</TabsTrigger>
-              <TabsTrigger value="signup">Register</TabsTrigger>
-            </TabsList>
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/")}
+            className="mb-6 hover-lift"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Button>
 
-            <TabsContent value="signin">
-              <form onSubmit={handleSignIn} className="space-y-4 mt-4">
-                <div className="space-y-2">
-                  <Label htmlFor="org-email">Organization Email</Label>
-                  <Input id="org-email" type="email" placeholder="org@example.com" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
-                  <Input id="password" type="password" required />
-                </div>
-                <Button type="submit" className="w-full bg-secondary" disabled={isLoading}>
-                  {isLoading ? "Signing in..." : "Sign In"}
-                </Button>
-              </form>
-            </TabsContent>
+          <Card className="p-8 shadow-lg animate-fade-in">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-success to-success/80 flex items-center justify-center shadow-lg">
+                <Building2 className="w-8 h-8 text-success-foreground" />
+              </div>
+            </div>
+            
+            <h2 className="text-2xl font-bold text-center mb-2 text-foreground">Organization Portal</h2>
+            <p className="text-center text-muted-foreground mb-6">
+              Connect with talented interns
+            </p>
 
-            <TabsContent value="signup">
-              <form onSubmit={handleSignUp} className="space-y-4 mt-4">
-                <div className="space-y-2">
-                  <Label htmlFor="org-name">Organization Name</Label>
-                  <Input id="org-name" type="text" placeholder="Your organization" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="org-type">Type</Label>
-                  <Input id="org-type" type="text" placeholder="Company / NGO / Government" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
-                  <Input id="signup-email" type="email" placeholder="contact@org.com" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
-                  <Input id="signup-password" type="password" required />
-                </div>
-                <Button type="submit" className="w-full bg-secondary" disabled={isLoading}>
-                  {isLoading ? "Registering..." : "Register Organization"}
-                </Button>
-              </form>
-            </TabsContent>
-          </Tabs>
-        </Card>
+            <Tabs defaultValue="signin" className="w-full">
+              <TabsList className="grid w-full grid-cols-2 mb-6">
+                <TabsTrigger value="signin">Sign In</TabsTrigger>
+                <TabsTrigger value="signup">Register</TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="signin">
+                <form onSubmit={handleSignIn} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="org-email">Organization Email</Label>
+                    <Input 
+                      id="org-email" 
+                      type="email" 
+                      placeholder="org@example.com" 
+                      required 
+                      className="h-11"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="password">Password</Label>
+                    <Input 
+                      id="password" 
+                      type="password" 
+                      required 
+                      className="h-11"
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full h-11 bg-success hover:bg-success/90 shadow-md" 
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Signing in..." : "Sign In"}
+                  </Button>
+                </form>
+              </TabsContent>
+
+              <TabsContent value="signup">
+                <form onSubmit={handleSignUp} className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="org-name">Organization Name</Label>
+                    <Input 
+                      id="org-name" 
+                      type="text" 
+                      placeholder="Your organization" 
+                      required 
+                      className="h-11"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="org-type">Organization Type</Label>
+                    <Input 
+                      id="org-type" 
+                      type="text" 
+                      placeholder="Company / NGO / Government" 
+                      required 
+                      className="h-11"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-email">Email</Label>
+                    <Input 
+                      id="signup-email" 
+                      type="email" 
+                      placeholder="contact@org.com" 
+                      required 
+                      className="h-11"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="signup-password">Password</Label>
+                    <Input 
+                      id="signup-password" 
+                      type="password" 
+                      required 
+                      className="h-11"
+                    />
+                  </div>
+                  <Button 
+                    type="submit" 
+                    className="w-full h-11 bg-success hover:bg-success/90 shadow-md" 
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Registering..." : "Register Organization"}
+                  </Button>
+                </form>
+              </TabsContent>
+            </Tabs>
+
+            <div className="mt-6 p-4 rounded-xl bg-muted/50 flex items-start gap-3">
+              <Shield className="w-5 h-5 text-success flex-shrink-0 mt-0.5" />
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Partner with PM Internship Scheme to find diverse talent and contribute to nation building.
+              </p>
+            </div>
+          </Card>
+        </div>
       </div>
     </div>
   );

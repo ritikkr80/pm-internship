@@ -3,9 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Shield, ArrowLeft } from "lucide-react";
+import { Shield, ArrowLeft, Lock } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@/hooks/use-toast";
+import { GovBranding } from "@/components/GovBranding";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const AdminAuth = () => {
   const navigate = useNavigate();
@@ -17,8 +19,8 @@ const AdminAuth = () => {
     setIsLoading(true);
     setTimeout(() => {
       toast({
-        title: "Admin access granted",
-        description: "Welcome to admin portal",
+        title: "Admin access granted 🔐",
+        description: "Welcome to the control center",
       });
       navigate("/admin/dashboard");
       setIsLoading(false);
@@ -26,39 +28,73 @@ const AdminAuth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-muted/30 to-background flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <Button
-          variant="ghost"
-          onClick={() => navigate("/")}
-          className="mb-4"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Home
-        </Button>
-
-        <Card className="p-8 shadow-elevated">
-          <div className="flex items-center justify-center mb-6">
-            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center">
-              <Shield className="w-6 h-6 text-accent-foreground" />
-            </div>
+    <div className="min-h-screen bg-background">
+      <GovBranding />
+      
+      <div className="flex items-center justify-center p-4 min-h-[calc(100vh-56px)]">
+        <div className="w-full max-w-md">
+          <div className="absolute top-4 right-4">
+            <ThemeToggle />
           </div>
-          <h2 className="text-2xl font-bold text-center mb-6 text-foreground">Admin Portal</h2>
 
-          <form onSubmit={handleSignIn} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="admin-id">Admin ID</Label>
-              <Input id="admin-id" type="text" placeholder="Enter admin ID" required />
+          <Button
+            variant="ghost"
+            onClick={() => navigate("/")}
+            className="mb-6 hover-lift"
+          >
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Back to Home
+          </Button>
+
+          <Card className="p-8 shadow-lg animate-fade-in border-2 border-accent/20">
+            <div className="flex items-center justify-center mb-6">
+              <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-accent to-accent/80 flex items-center justify-center shadow-lg">
+                <Shield className="w-8 h-8 text-accent-foreground" />
+              </div>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input id="password" type="password" required />
+            
+            <h2 className="text-2xl font-bold text-center mb-2 text-foreground">Admin Portal</h2>
+            <p className="text-center text-muted-foreground mb-6">
+              Secure access for administrators only
+            </p>
+
+            <form onSubmit={handleSignIn} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="admin-id">Admin ID</Label>
+                <Input 
+                  id="admin-id" 
+                  type="text" 
+                  placeholder="Enter admin ID" 
+                  required 
+                  className="h-11"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="password">Password</Label>
+                <Input 
+                  id="password" 
+                  type="password" 
+                  required 
+                  className="h-11"
+                />
+              </div>
+              <Button 
+                type="submit" 
+                className="w-full h-11 bg-accent hover:bg-accent/90 shadow-md" 
+                disabled={isLoading}
+              >
+                {isLoading ? "Verifying..." : "Sign In as Admin"}
+              </Button>
+            </form>
+
+            <div className="mt-6 p-4 rounded-xl bg-accent/10 border border-accent/20 flex items-start gap-3">
+              <Lock className="w-5 h-5 text-accent flex-shrink-0 mt-0.5" />
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                This portal is restricted to authorized personnel only. All access attempts are logged and monitored.
+              </p>
             </div>
-            <Button type="submit" className="w-full bg-accent" disabled={isLoading}>
-              {isLoading ? "Signing in..." : "Sign In as Admin"}
-            </Button>
-          </form>
-        </Card>
+          </Card>
+        </div>
       </div>
     </div>
   );
