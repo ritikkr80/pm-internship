@@ -1,6 +1,6 @@
 {
   "engines" :{
-    "node":"6.9.0"
+    "node":"20.0.0"
   },
   "name": "vite_react_shadcn_ts",
   "private": true,
