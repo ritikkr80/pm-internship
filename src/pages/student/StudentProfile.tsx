@@ -114,6 +114,16 @@ const StudentProfile = () => {
                     <Input id="category" placeholder="General" className="h-11" />
                   </div>
                 </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="state">State</Label>
+                    <Input id="State" placeholder="Jharkhand" className="h-11" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="city">City</Label>
+                    <Input id="city" placeholder="Ranchi" className="h-11" />
+                  </div>
+                </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="space-y-2">

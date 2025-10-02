@@ -1,9 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
+import { GovBranding } from "../components/GovBranding";
+import { ThemeToggle } from "../components/ThemeToggle";
+
 import { useNavigate } from "react-router-dom";
 import { GraduationCap, Building2, Shield, Sparkles, Target, Users } from "lucide-react";
-import { GovBranding } from "@/components/GovBranding";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Landing = () => {
   const navigate = useNavigate();
