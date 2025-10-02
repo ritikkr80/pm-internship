@@ -110,8 +110,18 @@ const StudentProfile = () => {
                     <Input id="degree" placeholder="B.Tech in Computer Science" className="h-11" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="year">Current Year</Label>
-                    <Input id="year" placeholder="3rd Year" className="h-11" />
+                    <Label htmlFor="category">Category</Label>
+                    <Input id="category" placeholder="General" className="h-11" />
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="state">State</Label>
+                    <Input id="State" placeholder="Jharkhand" className="h-11" />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="city">City</Label>
+                    <Input id="city" placeholder="Ranchi" className="h-11" />
                   </div>
                 </div>
 
